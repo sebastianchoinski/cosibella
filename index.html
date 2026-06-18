@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosibella Products</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="/src/js/main.js"></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <h1 class="site-header__title">Lista produktów</h1>
+        <p class="site-header__description">
+          Zapraszamy do zakupu produktów.
+        </p>
+      </div>
+    </header>
+
+    <main class="app" id="app">
+      <section class="toolbar" aria-labelledby="filters-title">
+        <div class="toolbar__header">
+          <div>
+            <h2 class="toolbar__title" id="filters-title">Filtry i sortowanie</h2>
+            <p class="toolbar__meta" id="results-summary" aria-live="polite">
+              Pobieranie produktów...
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="state-region" id="app-status" aria-live="polite" aria-atomic="true"></section>
+
+      <section class="products-section" aria-labelledby="products-title">
+        <h2 class="visually-hidden" id="products-title">Produkty</h2>
+        <div class="products-grid" id="products-grid"></div>
+      </section>
+
+      <nav class="pagination" id="pagination" aria-label="Paginacja produktów"></nav>
+    </main>
+  </body>
+</html>

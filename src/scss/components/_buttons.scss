@@ -1,0 +1,48 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+.button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $color-accent;
+  border-radius: $radius-md;
+  background: $color-accent;
+  color: $color-surface;
+  font-weight: 800;
+  gap: $space-2;
+  padding: $space-2 $space-4;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.button:hover:not(:disabled) {
+  border-color: $color-accent-hover;
+  background: $color-accent-hover;
+}
+
+.button:focus-visible {
+  @include focus-ring;
+}
+
+.button:disabled {
+  border-color: $color-border;
+  background: $color-surface-muted;
+  color: $color-muted;
+}
+
+.button--secondary,
+.button--ghost {
+  background: $color-surface;
+  color: $color-accent;
+}
+
+.button--secondary:hover:not(:disabled),
+.button--ghost:hover:not(:disabled) {
+  background: $color-accent-soft;
+  color: $color-accent-hover;
+}

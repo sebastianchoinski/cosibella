@@ -1,0 +1,42 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+.toolbar {
+  @include card;
+
+  display: grid;
+  gap: $space-5;
+  border-top: 4px solid $color-accent;
+  padding: $space-5;
+}
+
+.toolbar__header {
+  display: grid;
+  gap: $space-4;
+}
+
+.toolbar__title {
+  font-size: 1.15rem;
+}
+
+.toolbar__meta {
+  margin-block-start: $space-1;
+  color: $color-muted;
+  font-size: 0.92rem;
+}
+
+.toolbar__form {
+  display: grid;
+  gap: $space-4;
+}
+
+@include respond(md) {
+  .toolbar__header {
+    align-items: start;
+    grid-template-columns: 1fr auto;
+  }
+
+  .toolbar__form {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,133 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+.modal {
+  position: fixed;
+  z-index: 20;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: $space-4;
+}
+
+.modal[hidden] {
+  display: none;
+}
+
+.modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: $color-overlay;
+}
+
+.modal__panel {
+  position: relative;
+  display: grid;
+  width: min(100%, 46rem);
+  max-height: min(90vh, 48rem);
+  overflow: auto;
+  border-radius: $radius-md;
+  background: $color-surface;
+  box-shadow: $shadow-modal;
+}
+
+.modal__header {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  display: grid;
+  align-items: start;
+  grid-template-columns: 1fr auto;
+  gap: $space-4;
+  border-bottom: 1px solid $color-border;
+  background: $color-surface;
+  padding: $space-5;
+}
+
+.modal__eyebrow {
+  color: $color-accent;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.modal__title {
+  margin-block-start: $space-1;
+  font-size: 1.35rem;
+  overflow-wrap: anywhere;
+}
+
+.modal__close {
+  display: inline-grid;
+  width: 2.5rem;
+  height: 2.5rem;
+  place-items: center;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  background: $color-surface;
+  color: $color-text;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.modal__close:hover {
+  border-color: $color-accent;
+  color: $color-accent;
+}
+
+.modal__close:focus-visible {
+  @include focus-ring;
+}
+
+.modal__body {
+  display: grid;
+  gap: $space-6;
+  padding: $space-5;
+}
+
+.modal__summary {
+  display: grid;
+  gap: $space-3;
+  margin: 0;
+}
+
+.modal__summary-row {
+  display: grid;
+  gap: $space-1;
+  border-bottom: 1px solid $color-border;
+  padding-block-end: $space-3;
+}
+
+.modal__summary-row dt {
+  color: $color-muted;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.modal__summary-row dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.modal__subtitle {
+  margin-block-end: $space-3;
+  font-size: 1rem;
+}
+
+.modal__json {
+  max-height: 24rem;
+  overflow: auto;
+  border-radius: $radius-md;
+  background: #261b22;
+  color: #fff3e8;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  padding: $space-4;
+  white-space: pre-wrap;
+}
+
+@include respond(md) {
+  .modal__summary-row {
+    grid-template-columns: 9rem 1fr;
+  }
+}

@@ -1,0 +1,46 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+.state-region:empty {
+  display: none;
+}
+
+.state-card {
+  @include card;
+
+  display: grid;
+  gap: $space-3;
+  padding: $space-5;
+}
+
+.state-card__title {
+  font-size: 1.05rem;
+}
+
+.state-card__description,
+.state-card__details {
+  color: $color-muted;
+}
+
+.state-card__details {
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.state-card--loading {
+  border-color: rgba($color-success, 0.3);
+}
+
+.state-card--error {
+  border-color: rgba($color-error, 0.35);
+  background: #fff0f4;
+}
+
+.state-card--empty {
+  border-color: rgba($color-accent, 0.24);
+}
+
+.state-card--invalid {
+  border-color: rgba($color-warning, 0.35);
+  background: #fff0d1;
+}

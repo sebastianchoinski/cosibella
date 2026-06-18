@@ -1,0 +1,49 @@
+@use '../abstracts/mixins' as *;
+@use '../abstracts/variables' as *;
+
+.pagination {
+  display: grid;
+  grid-template-areas:
+    'status status'
+    'prev next';
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: $space-3;
+}
+
+.pagination__button {
+  width: 100%;
+}
+
+.pagination__button--prev {
+  grid-area: prev;
+}
+
+.pagination__button--next {
+  grid-area: next;
+}
+
+.pagination__status {
+  // keep this on its own line on small screens
+  grid-area: status;
+  min-width: 0;
+  color: $color-muted;
+  font-weight: 800;
+  text-align: center;
+}
+
+@include respond(sm) {
+  .pagination {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+
+  .pagination__button {
+    width: auto;
+  }
+
+  .pagination__status {
+    min-width: 9rem;
+  }
+}

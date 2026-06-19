@@ -31,7 +31,67 @@
               Pobieranie produktów...
             </p>
           </div>
+          <button class="button button--ghost" id="clear-filters-button" type="button">
+            Wyczyść filtry
+          </button>
         </div>
+
+        <form class="toolbar__form" id="filters-form">
+          <div class="form-field">
+            <label class="form-field__label" for="category-filter">Kategoria</label>
+            <select class="form-field__control" id="category-filter" name="category">
+              <option value="">Wszystkie kategorie</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="min-price-filter">Cena od</label>
+            <input
+              class="form-field__control"
+              id="min-price-filter"
+              name="minPrice"
+              type="number"
+              inputmode="decimal"
+              min="0"
+              step="0.01"
+              placeholder="np. 20"
+            />
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="max-price-filter">Cena do</label>
+            <input
+              class="form-field__control"
+              id="max-price-filter"
+              name="maxPrice"
+              type="number"
+              inputmode="decimal"
+              min="0"
+              step="0.01"
+              placeholder="np. 100"
+            />
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="sort-filter">Sortowanie</label>
+            <select class="form-field__control" id="sort-filter" name="sortBy">
+              <option value="default">Domyślne</option>
+              <option value="price-asc">Cena rosnąco</option>
+              <option value="price-desc">Cena malejąco</option>
+              <option value="name-asc">Nazwa A-Z</option>
+              <option value="name-desc">Nazwa Z-A</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="page-size-filter">Na stronie</label>
+            <select class="form-field__control" id="page-size-filter" name="pageSize">
+              <option value="8">8</option>
+              <option value="12">12</option>
+              <option value="24">24</option>
+            </select>
+          </div>
+        </form>
       </section>
 
       <section class="state-region" id="app-status" aria-live="polite" aria-atomic="true"></section>

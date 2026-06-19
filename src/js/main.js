@@ -6,6 +6,7 @@ import { selectProductsViewModel } from './domain/selectors.js';
 import { getState, setState, subscribe } from './state/store.js';
 import { readStateFromUrl, syncStateToUrl } from './state/urlState.js';
 import { renderFilters, setupFilters } from './ui/renderFilters.js';
+import { renderPagination, setupPagination } from './ui/renderPagination.js';
 import { renderProducts, setupProductsGrid } from './ui/renderProducts.js';
 
 setupFilters({
@@ -15,6 +16,10 @@ setupFilters({
 
 setupProductsGrid({
   onProductSelect: () => {},
+});
+
+setupPagination({
+  onPageChange: handlePageChange,
 });
 
 window.addEventListener('popstate', handlePopState);
@@ -66,6 +71,7 @@ function renderApp() {
     visibleProducts: viewModel.visibleProducts,
     isPriceRangeInvalid: viewModel.isPriceRangeInvalid,
   });
+  renderPagination({ state, viewModel });
   syncStateToUrl(getState());
 }
 
@@ -84,6 +90,10 @@ function handleClearFilters() {
     sortBy: 'default',
     page: 1,
   });
+}
+
+function handlePageChange(page) {
+  setState({ page });
 }
 
 function handlePopState() {

@@ -25,12 +25,7 @@ export async function fetchProducts() {
     }
 
     const payload = await response.json();
-
-    if (Array.isArray(payload)) {
-      return payload;
-    }
-
-    throw new ProductsApiError('Odpowiedź API ma nieobsługiwany format.');
+    return extractProductsFromPayload(payload);
   } catch (error) {
     if (error.name === 'AbortError') {
       throw new ProductsApiError('Przekroczono czas oczekiwania na odpowiedź API.');
@@ -44,4 +39,28 @@ export async function fetchProducts() {
   } finally {
     window.clearTimeout(timeoutId);
   }
+}
+
+function extractProductsFromPayload(payload) {
+  if (Array.isArray(payload)) {
+    return payload;
+  }
+
+  if (!isPlainObject(payload)) {
+    throw new ProductsApiError('Odpowiedź API ma nieobsługiwany format.');
+  }
+
+  // api may send a bare array or a wrapped list
+  const collectionKeys = ['products', 'data', 'items'];
+  const productsCollection = collectionKeys.map((key) => payload[key]).find(Array.isArray);
+
+  if (!productsCollection) {
+    throw new ProductsApiError('Odpowiedź API nie zawiera listy produktów.');
+  }
+
+  return productsCollection;
+}
+
+function isPlainObject(value) {
+  return Object.prototype.toString.call(value) === '[object Object]';
 }

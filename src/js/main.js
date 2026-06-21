@@ -125,5 +125,6 @@ function shouldClampPage(state, viewModel) {
     return false;
   }
 
+  // filters can shrink pages, so fix the page before render
   return state.page !== viewModel.currentPage;
 }

@@ -1,6 +1,15 @@
 import { escapeHtml } from '../utils/escapeHtml.js';
 import { formatPrice } from '../utils/formatPrice.js';
 
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'button:not([disabled])',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  'textarea:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(',');
+
 const modal = document.querySelector('#product-modal');
 const modalPanel = modal.querySelector('.modal__panel');
 const modalBody = document.querySelector('#modal-body');
@@ -63,6 +72,36 @@ function handleDocumentKeydown(event) {
 
   if (event.key === 'Escape') {
     closeModal();
+    return;
+  }
+
+  if (event.key === 'Tab') {
+    trapFocus(event);
+  }
+}
+
+function trapFocus(event) {
+  // keep tab key inside the modal
+  const focusableElements = [...modal.querySelectorAll(FOCUSABLE_SELECTOR)];
+
+  if (focusableElements.length === 0) {
+    event.preventDefault();
+    modalPanel.focus();
+    return;
+  }
+
+  const firstFocusableElement = focusableElements[0];
+  const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+  if (event.shiftKey && document.activeElement === firstFocusableElement) {
+    event.preventDefault();
+    lastFocusableElement.focus();
+    return;
+  }
+
+  if (!event.shiftKey && document.activeElement === lastFocusableElement) {
+    event.preventDefault();
+    firstFocusableElement.focus();
   }
 }
 
